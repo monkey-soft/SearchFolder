@@ -1,5 +1,7 @@
 package com.monkey.util;
 
+import java.io.File;
+
 /**
  * 
  * @author monkey
@@ -8,22 +10,39 @@ package com.monkey.util;
 public class CalculateSpace
 {
 	/**
-	 * 将size转化成以M为单位的数
+	 * 返回byte的数据大小对应的能一目了然的单位
 	 * @param size
 	 * @return
 	 */
-	public static String ChangeIntoM(long size)
+	public static String CalculateSpace(long size, File file)
 	{
-		return (size/1024/1024)+"M";
+		if(size == 0)
+		{
+			if(file.isDirectory())
+			{
+				return "文件夹";
+			}
+			else
+			{
+				return "空";
+			}
+		}
+		else if(size < 1024) // byte
+		{
+			return size+"字节";
+		}
+		else if(size < 1024*1024) //KB
+		{
+			return size/1024+"KB";
+		}
+		else if(size < 1024*1024*1024) // MB
+		{
+			return size/1024/1024+"MB";
+		}
+		else // GB
+		{
+			return size/1024/1024/1024+"GB";
+		}
 	}
 	
-	/**
-	 * 将size转化成以为G为单位的数
-	 * @param size
-	 * @return
-	 */
-	public static String ChangeIntoG(long size)
-	{
-		return (size/1024/1024/1024)+"G";
-	}
 }

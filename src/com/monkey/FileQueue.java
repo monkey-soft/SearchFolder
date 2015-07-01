@@ -1,4 +1,4 @@
-package com.monkey.util;
+package com.monkey;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -11,7 +11,7 @@ import java.util.LinkedList;
 public class FileQueue 
 {
 	// 使用链表来构建队列
-	private LinkedList<File> filequeues = new LinkedList<File>();
+	private LinkedList<File> filequeue = new LinkedList<File>();
 	
 	/**
 	 * 加入队列
@@ -19,7 +19,7 @@ public class FileQueue
 	 */
 	public void AddToQueue(File file)
 	{
-		filequeues.addLast(file);
+		filequeue.addLast(file);
 	}
 	
 	/**
@@ -30,13 +30,15 @@ public class FileQueue
 	{
 		for(File file : files)
 		{
+			if(!file.isHidden())
 			AddToQueue(file);
 		}
 	}
 	
+	
 	public String FileQueueLength()
 	{
-		return filequeues.size()+"个文件夹";
+		return filequeue.size()+"个文件夹";
 	}
 
 	/**
@@ -45,8 +47,9 @@ public class FileQueue
 	 */
 	public File RemoveFromQueue()
 	{
-		return filequeues.removeFirst();
+		return filequeue.removeFirst();
 	}
+	
 	
 	/**
 	 * 判断队列是否为空
@@ -54,7 +57,7 @@ public class FileQueue
 	 */
 	public boolean IsEmpty()
 	{
-		return filequeues.isEmpty();
+		return filequeue.isEmpty();
 	}
 	
 	/**
@@ -64,7 +67,15 @@ public class FileQueue
 	 */
 	public boolean ContainFile(File file)
 	{
-		return filequeues.contains(file);
+		return filequeue.contains(file);
 	}
 	
+	
+	public void show(File[] files)
+	{
+		for(File f:files)
+		{
+			System.out.println(f.getName());
+		}
+	}
 }
