@@ -14,7 +14,7 @@ public class CalculateSpace
 	 * @param size
 	 * @return
 	 */
-	public static String CalculateSpace(long size, File file)
+	public static String CalculateFileSpace(long size, File file)
 	{
 		if(size == 0)
 		{

@@ -1,6 +1,5 @@
 package com.monkey;
 
-import java.io.File;
 import java.util.LinkedList;
 
 /**
@@ -11,41 +10,41 @@ import java.util.LinkedList;
 public class FileQueue 
 {
 	// 使用链表来构建队列
-	private LinkedList<File> filequeue = new LinkedList<File>();
+	private LinkedList<FileTreeNode> filequeue = new LinkedList<FileTreeNode>();
 	
 	/**
 	 * 加入队列
-	 * @param file
+	 * @param filenode
 	 */
-	public void AddToQueue(File file)
+	public void AddToQueue(FileTreeNode filenode)
 	{
-		filequeue.addLast(file);
+		filequeue.addLast(filenode);
 	}
 	
 	/**
 	 * 添加一个File数组到队列中
 	 * @param files
 	 */
-	public void AddFileListToQueue(File[] files)
-	{
-		for(File file : files)
-		{
-			if(!file.isHidden())
-			AddToQueue(file);
-		}
-	}
+//	public void AddFileListToQueue(File[] files)
+//	{
+//		for(File file : files)
+//		{
+//			if(!file.isHidden())
+//			AddToQueue(file);
+//		}
+//	}
 	
 	
 	public String FileQueueLength()
 	{
-		return filequeue.size()+"个文件夹";
+		return filequeue.size()+"个文件";
 	}
 
 	/**
 	 * 出队列
 	 * @return
 	 */
-	public File RemoveFromQueue()
+	public FileTreeNode RemoveFromQueue()
 	{
 		return filequeue.removeFirst();
 	}
@@ -61,21 +60,21 @@ public class FileQueue
 	}
 	
 	/**
-	 * 判断队列中是否包含了file
-	 * @param file
+	 * 判断队列中是否包含了filenode
+	 * @param filenode
 	 * @return
 	 */
-	public boolean ContainFile(File file)
+	public boolean ContainFile(FileTreeNode filenode)
 	{
-		return filequeue.contains(file);
+		return filequeue.contains(filenode);
 	}
 	
 	
-	public void show(File[] files)
-	{
-		for(File f:files)
-		{
-			System.out.println(f.getName());
-		}
-	}
+//	public void show(File[] files)
+//	{
+//		for(File f:files)
+//		{
+//			System.out.println(f.getName());
+//		}
+//	}
 }

@@ -7,7 +7,7 @@ package com.monkey.util;
  */
 public class CalculateTime
 {
-	public static String CalculateTime(long time)
+	public static String CalculateraversalTime(long time)
 	{
 		if(time < 3600)
 		{
