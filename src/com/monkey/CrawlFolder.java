@@ -29,41 +29,47 @@ public class CrawlFolder
 		
 		if(root.isDirectory())
 		{
-			// 文件的绝对路径
-			System.out.println(root.getAbsolutePath());
-			
-			// 判断文件的大小
-			System.out.println(CalculateSpace.CalculateSpace(root.getTotalSpace(), root));
-			
-			fileQueue.AddFileListToQueue(root.listFiles());			
-			
-			
-			while(!fileQueue.IsEmpty())
+			fileQueue.AddToQueue(root);
+			showRootFolderInfo(root);
+		}
+		
+		while(!fileQueue.IsEmpty())
+		{
+			File file = fileQueue.RemoveFromQueue();  
+				
+			// 已经遍历过的文件直接跳过
+			if(visitedQueue.Iscontainment(file))
 			{
-				File file = fileQueue.RemoveFromQueue();  
+				return;
+			}	
 				
-				
-				// 已经遍历过的文件直接跳过
-				if(visitedQueue.Iscontainment(file))
-				{
-					return;
-				}	
-				
-				showFolderInfo(file);
-				
-				if(file.isDirectory() && !visitedQueue.Iscontainment(file))
-				{
-					fileQueue.AddFileListToQueue(file.listFiles());
-				}
-				
-				visitedQueue.addVisitedFolder(file);  
-				
-				
-			}  
+			showFolderInfo(file);
 			
+			
+				
+//			if(file.isDirectory() && !visitedQueue.Iscontainment(file))
+//			{
+//				fileQueue.AddFileListToQueue(file.listFiles());
+//			}
+//				
+//			visitedQueue.addVisitedFolder(file);  
 		}
 	}
 	
+	/**
+	 * 输出根目录的相关信息
+	 * @param file
+	 */
+	public void showRootFolderInfo(File root)
+	{
+		// 文件的绝对路径
+		System.out.println(root.getAbsolutePath());
+		
+		// 判断文件的大小
+		System.out.println(CalculateSpace.CalculateSpace(root.getTotalSpace(), root));
+		
+		fileQueue.AddFileListToQueue(root.listFiles());	
+	}
 	
 	/**
 	 * 输出文件夹相关的信息
