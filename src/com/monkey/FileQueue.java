@@ -32,9 +32,19 @@ public class FileQueue
 		
 		for(File file : files)
 		{
-			filenode = new FileTreeNode();
-			if(!file.isHidden())
-//			AddToQueue(file);
+			if(file.canRead() && !file.getName().equals("$RECYCLE.BIN")
+					&& !file.getName().equals("RECYCLER")
+					&& !file.getName().equals("System Volume Information"))
+			{
+				filenode = new FileTreeNode();     // 每次都new一次,不知道会不会很影响性能
+				filenode.setFile(file);
+				filenode.setIsHidden(file.isHidden());
+				filenode.setParent(fn);
+				filenode.setRank(fn.getRank()+1);
+				filenode.setRoom(file);
+				
+				AddToQueue(filenode);
+			}
 		}
 	}
 	

@@ -12,7 +12,7 @@ import com.monkey.util.CalculateTime;
  */
 public class CrawlFolder 
 {
-	private static String fileStr = "E:\\";
+	private static String fileStr = "E:\\";  //"E:\\爱情公寓"; // "E:\\";  
 	
 	// 访问过的文件夹的集合
 	private static VisitedQueue visitedQueue = new VisitedQueue();
@@ -55,51 +55,15 @@ public class CrawlFolder
 				return ;
 			}
 			
-			showFolderInfo(fn);
-			
 			if(fn.getFile().isDirectory())
 			{
 				fileQueue.AddFileListToQueue(fn.getFile().listFiles(), fn);
 			}
 			
+			showFolderInfo(fn);
 		}
 	}
-	
-	/**
-	 * 遍历文件夹
-	 */
-//	public void TraversalFolders()
-//	{	
-//		File root = new File(fileStr); 
-//		
-//		if(root.isDirectory())
-//		{
-//			fileQueue.AddToQueue(root);
-//			showRootFolderInfo(root);
-//		}
-//		
-//		while(!fileQueue.IsEmpty())
-//		{
-//			File file = fileQueue.RemoveFromQueue();  
-//				
-//			// 已经遍历过的文件直接跳过
-//			if(visitedQueue.Iscontainment(file))
-//			{
-//				return;
-//			}	
-//				
-//			showFolderInfo(file);
-//			
-//			
-//				
-//			if(file.isDirectory() && !visitedQueue.Iscontainment(file))
-//			{
-//				fileQueue.AddFileListToQueue(file.listFiles());
-//			}
-//				
-//			visitedQueue.addVisitedFolder(file);  
-//		}
-//	}
+
 	
 	/**
 	 * 输出根目录的相关信息
@@ -122,17 +86,23 @@ public class CrawlFolder
 		// 等级越高就输出越多个空格
 		for(int i=1; i<filenode.getRank(); i++)
 		{
-			System.out.print(" ");
+			System.out.print("==|");
 		}
 		
 		// 输出文件名称
 		System.out.print(filenode.getFileName());  
 		
+		// 输出文件的等级
+		System.out.print("[第" + filenode.getRank() + "级");
+		
 		// 输出文件是否为隐藏的
-		System.out.print("[" + filenode.getIsHidden());
+		System.out.print(" - " + filenode.getIsHidden());
 
 		//  输出文件的大小
-		System.out.println(" - " + filenode.getRoom() + "]");
+		System.out.print(" - " + filenode.getRoom() + "]");
+		
+		// 输出上级目录
+		System.out.println(" [上级目录:" + filenode.getParent().getFile().getName() + "]");
 	}
 	
 	public static void main(String[] args)

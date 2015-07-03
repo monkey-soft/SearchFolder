@@ -23,11 +23,8 @@ public class FileTreeNode
 	// 节点是否是隐藏文件
 	private String isHidden;
 
-	// 双亲节点
+	// 上级节点
 	private FileTreeNode parent;
-	
-	// 子节点
-//	private FileTreeNode[] children;
 
 	// 获取文件的文件名称
 	public String getFileName()
@@ -93,26 +90,5 @@ public class FileTreeNode
 	{
 		this.parent = parent;
 	}
-	
-//	public FileTreeNode[] getChildren()
-//	{
-//		return children;
-//	}
-
-	/**
-	 * 将files数组转化为children     // ? 每次都要new一次,会不会影响性能  ?
-	 * @param files
-	 */
-//	public void setChildren(File[] files)
-//	{
-//		FileTreeNode filetreenode;
-//		
-//		for(int i=0; i<files.length; i++)
-//		{
-//			filetreenode = new FileTreeNode();
-//			filetreenode.setFile(files[i]);
-//			this.children[i] = filetreenode;
-//		}
-//	}
 	
 }
