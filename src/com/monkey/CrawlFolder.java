@@ -33,6 +33,9 @@ public class CrawlFolder
 		filenode.setRoom(root);
 		filenode.setParent(filenode);
 		
+		System.out.println("绝对路径: " + root.getAbsolutePath());
+		System.out.println("内存空间: " + CalculateSpace.CalculateFileSpace(root.getTotalSpace(), root));
+		
 		// 是文件夹就向下遍历,否则跳出
 		if(root.isDirectory())
 		{
@@ -53,7 +56,7 @@ public class CrawlFolder
 				return ;
 			}
 			
-			
+			showFolderInfo(fn);
 			
 		}
 	}
@@ -98,38 +101,37 @@ public class CrawlFolder
 	 * 输出根目录的相关信息
 	 * @param file
 	 */
-	public void showRootFolderInfo(File root)
-	{
-		// 文件的绝对路径
-		System.out.println(root.getAbsolutePath());
-		
-		// 判断文件的大小
-		System.out.println(CalculateSpace.CalculateFileSpace(root.getTotalSpace(), root));
-		
-//		fileQueue.AddFileListToQueue(root.listFiles());	
-	}
-	
-//	/**
-//	 * 输出文件夹相关的信息
-//	 */
-//	public void showFolderInfo(File file)
+//	public void showRootFolderInfo(File root)
 //	{
-//		// 输出文件名称
-//		System.out.print(file.getName());
+//		// 文件的绝对路径
+//		System.out.println(root.getAbsolutePath());
 //		
-//		// 输出文件是否为隐藏的
-//		if(file.isHidden())
-//		{
-//			System.out.print(" - 隐藏");
-//		}
-//		else
-//		{
-//			System.out.print(" - 可见");
-//		}
+//		// 判断文件的大小
+//		System.out.println(CalculateSpace.CalculateFileSpace(root.getTotalSpace(), root));
 //		
-//		//  输出文件的大小
-//		System.out.println(" - " + CalculateSpace.CalculateSpace(file.length(), file));
+//		fileQueue.AddFileListToQueue(root.listFiles());	
 //	}
+	
+	/**
+	 * 输出文件夹相关的信息
+	 */
+	public void showFolderInfo(FileTreeNode filenode)
+	{
+		// 等级越高就输出越多个空格
+		for(int i=1; i<filenode.getRank(); i++)
+		{
+			System.out.print(" ");
+		}
+		
+		// 输出文件名称
+		System.out.print(filenode.getFileName());  
+		
+		// 输出文件是否为隐藏的
+		System.out.print("[" + filenode.getIsHidden());
+
+		//  输出文件的大小
+		System.out.println(" - " + filenode.getRoom() + "]");
+	}
 	
 	public static void main(String[] args)
 	{
