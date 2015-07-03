@@ -33,8 +33,7 @@ public class CrawlFolder
 		filenode.setRoom(root);
 		filenode.setParent(filenode);
 		
-		System.out.println("绝对路径: " + root.getAbsolutePath());
-		System.out.println("内存空间: " + CalculateSpace.CalculateFileSpace(root.getTotalSpace(), root));
+		showRootFolderInfo(root);
 		
 		// 是文件夹就向下遍历,否则跳出
 		if(root.isDirectory())
@@ -57,6 +56,11 @@ public class CrawlFolder
 			}
 			
 			showFolderInfo(fn);
+			
+			if(fn.getFile().isDirectory())
+			{
+				fileQueue.AddFileListToQueue(fn.getFile().listFiles(), fn);
+			}
 			
 		}
 	}
@@ -101,16 +105,14 @@ public class CrawlFolder
 	 * 输出根目录的相关信息
 	 * @param file
 	 */
-//	public void showRootFolderInfo(File root)
-//	{
-//		// 文件的绝对路径
-//		System.out.println(root.getAbsolutePath());
-//		
-//		// 判断文件的大小
-//		System.out.println(CalculateSpace.CalculateFileSpace(root.getTotalSpace(), root));
-//		
-//		fileQueue.AddFileListToQueue(root.listFiles());	
-//	}
+	public void showRootFolderInfo(File root)
+	{
+		// 文件的绝对路径
+		System.out.println("绝对路径: " + root.getAbsolutePath());
+		
+		// 文件的储存空间
+		System.out.println("内存空间: " + CalculateSpace.CalculateFileSpace(root.getTotalSpace(), root));
+	}
 	
 	/**
 	 * 输出文件夹相关的信息

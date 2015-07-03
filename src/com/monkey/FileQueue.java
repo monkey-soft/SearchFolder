@@ -1,5 +1,6 @@
 package com.monkey;
 
+import java.io.File;
 import java.util.LinkedList;
 
 /**
@@ -25,14 +26,17 @@ public class FileQueue
 	 * 添加一个File数组到队列中
 	 * @param files
 	 */
-//	public void AddFileListToQueue(File[] files)
-//	{
-//		for(File file : files)
-//		{
-//			if(!file.isHidden())
+	public void AddFileListToQueue(File[] files, FileTreeNode fn)
+	{
+		FileTreeNode filenode;
+		
+		for(File file : files)
+		{
+			filenode = new FileTreeNode();
+			if(!file.isHidden())
 //			AddToQueue(file);
-//		}
-//	}
+		}
+	}
 	
 	
 	public String FileQueueLength()
